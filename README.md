@@ -29,7 +29,7 @@ always @(posedge clk)
 ```
 The synthesization of the above verilog code is
 
-
+![synthesis](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/7b9bc10f-6d91-4497-b9e7-f0e19733d117)
   
   
 
