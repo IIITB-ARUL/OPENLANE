@@ -3,11 +3,13 @@
 
 <details>
   <summary>
-    SOC design and OpenLANE
+    Introduction
   </summary>
+**RISC-V Architecture**
 
-**Introduction to all components of open-source digital asic design**
+RISC-V is an open-source instruction set architecture (ISA) designed for use in computer processors. It's named after the five "RISC" principles: Reduced Instruction Set Computing. Unlike proprietary ISAs like x86 (used by Intel and AMD) and ARM (used by various companies, including Apple and Qualcomm), RISC-V is open and freely available for anyone to use, modify, and implement. So C program will compile into assembly language and then converted into binary format. This binary will execute on the layout itself.
 
+RISC-V is a versatile and open ISA that has the potential to disrupt the semiconductor industry by democratizing processor design and enabling a wide range of applications. Its openness, simplicity, and flexibility make it an attractive choice for both industry professionals and educational institutions. 
 
 
 
@@ -15,7 +17,7 @@
 **Simplified RTL2GDS flow**
 
 
-
+![rtlflow](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/7aee3c43-cf1c-407b-83a0-f60aedbecfa3)
 
 **Synthesis**- Synthesis translates the design RTL into circuits made out of components from standard cell library.Here the high level HDL code is converted into gatelevel netlist.Gatelevel netlist is the functional equivalent of RTL.
 
@@ -74,12 +76,24 @@ Here the positions are obtained form the positions achieved by the global placem
 
 **Sign-off**-Sign-off involves a comprehensive set of checks, analyses, and reviews to ensure that the design meets all specifications, performance targets, and manufacturing requirements. 
 
-**GDII File  Generation**-Once the layout is verified and passes all checks, the final step is to generate the GDSII file format, which represents the complete physical layout of the chip. The GDSII file contains the geometric information necessary for fabrication, including the shapes, layers, masks, and other relevant details.
+**GDSII File  Generation**-Once the layout is verified and passes all checks, the final step is to generate the GDSII file format, which represents the complete physical layout of the chip. The GDSII file contains the geometric information necessary for fabrication, including the shapes, layers, masks, and other relevant details.
+
+</details>
 
 
-**OpenLane**
+
+<details>
+  <summary>
+    SOC design and OpenLANE
+  </summary>
+  
+
+**OpenLane and Strive chipsets**
 
 OpenLane is an open-source digital ASIC (Application-Specific Integrated Circuit) design flow and toolchain that helps engineers and designers automate the process of designing and manufacturing custom integrated circuits. It is primarily used for creating semiconductor chips for various applications, such as microprocessors, memory chips, and custom ASICs.
+
+![strivefamily](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/1e821aee-b987-4814-ad00-0d77c7689140)
+
 
 **OpenLane ASIC Flow**
 
@@ -130,11 +144,28 @@ cd /home/arulvignesh/OpenLane/designs/ci
 cp -r * ../
 ```  
 
+**Synthesis in OpenLane**
 
+```
+cd ~/OpenLane
+make mount
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a
+run_synthesis
 
-![strivefamily](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/1e821aee-b987-4814-ad00-0d77c7689140)
+```
+
+Synthesis statistics:
+
 ![reports](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/5ac46367-4731-4aa2-93cb-49f361b43bd1)
-![snynthesis](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/c25add3b-f24d-4252-9dd6-70c732637228)
 
 
+
+>Flop ratio = Number of D Flip flops/total Number of cells    =  1596/10104   = 0.1579
+            
+             
+
+
+             
 </details>
