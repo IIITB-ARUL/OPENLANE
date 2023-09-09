@@ -36,6 +36,14 @@ The synthesization of the above verilog code is
 
 These cells have regulaar layout which has fixed height whereas the width is a discrete variable.Each cell has different models or views which are utilized by  the EDA tools.One of the views is liberty view which consists  of delay model,power model,etc.
 
+
+
+![stdcell](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/3108e86e-741e-43c6-8f20-4260bfb168a7)
+
+
+
+
+
 **Floor Planning**-The main obejective of floor planning is to plan silicon area and robust power distribution.Floorplanning sets the foundation for subsequent steps in the physical design process, such as placement and routing.
 Floorplanning includes the allocation of input and output pads or pins, ensuring that they are accessible for external connections and follow design rules, such as avoiding signal contention.
 
@@ -75,6 +83,7 @@ OpenLane is an open-source digital ASIC (Application-Specific Integrated Circuit
 
 **OpenLane ASIC Flow**
 
+![olasicflow](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/bcc8a481-0fd8-49ff-819b-645db677e6b4)
 
 
 
@@ -121,6 +130,11 @@ cd /home/arulvignesh/OpenLane/designs/ci
 cp -r * ../
 ```  
 
+
+
+![strivefamily](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/1e821aee-b987-4814-ad00-0d77c7689140)
+![reports](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/5ac46367-4731-4aa2-93cb-49f361b43bd1)
+![snynthesis](https://github.com/IIITB-ARUL/OPENLANE/assets/140998631/c25add3b-f24d-4252-9dd6-70c732637228)
 
 
 </details>
