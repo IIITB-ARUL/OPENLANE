@@ -178,7 +178,7 @@ Synthesis statistics:
 
 <details>
   <summary>
-    Floor Planning considerations
+    Chip floor Planning and considerations
   </summary>
 
 **Width and height of core and die**-Core is where the logic blocks are placed and this seats at the center of the die. The width and height depends on dimensions of each standard cells on the netlist. **Utilization factor is (area occupied by netlist)/(total area of the core)**. In practical scenario, utilization factor is 0.5 to 0.6. This is space occupied by netlist only, the remaining space is for routing and more additional cells. **Aspect ratio is (height)/(width)** of core, so only aspect ratio of 1 will produce a square core shape.
@@ -239,4 +239,9 @@ To center the view, press "s" to select whole die then press "v" to center the v
 
 ![floorplan3](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/818c9f05-993e-4a6c-aafa-9ba96a1a5899)
 
+</details>
+<details>
+  <summary>
+    Library binding and placement
+  </summary>
 </details>
