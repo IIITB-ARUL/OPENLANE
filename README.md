@@ -163,9 +163,44 @@ Synthesis statistics:
 
 
 >Flop ratio = Number of D Flip flops/total Number of cells    =  1596/10104   = 0.1579
+
             
              
 
 
              
+</details>
+
+
+
+
+# Day 2
+
+<details>
+  <summary>
+    Floor Planning considerations
+  </summary>
+
+**Width and height of core and die**-Core is where the logic blocks are placed and this seats at the center of the die. The width and height depends on dimensions of each standard cells on the netlist. **Utilization factor is (area occupied by netlist)/(total area of the core)**. In practical scenario, utilization factor is 0.5 to 0.6. This is space occupied by netlist only, the remaining space is for routing and more additional cells. **Aspect ratio is (height)/(width)** of core, so only aspect ratio of 1 will produce a square core shape.
+
+**Preplaced Cells**-These are reusable complex logicblocks or modules or IPs or macros that is already implemented (memory, clock-gating cell, mux, comparator...) . The placement on the core is user-defined and must be done before placement and routing (thus preplaced cells). The automated place and route tools will not be able to touch and move these preplaced cells so this must be very well defined
+
+**Decoupling capacitors**-During a logic state change an increased demand on current behavior happens. Resistance in a non-idea circuit means there are multiple voltage drops betwen the supply and logic circuit.
+
+>Noise Margin : voltages should be inside a logic margin value (NM_l or NM_h) do be detected as 0 or 1, respectively. Voltage drops can affect the result for the logic outcome (undefined region). Decoupling capacitors are placed next to the preplaced cells to prevent the voltage drops during transition.
+
+
+![decap](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/2df18d9c-f43a-49f4-8703-1ca9e025ea62)
+
+
+
+**Power Planning**-Power Planning Decoupling capactor for sourcing logic blocks with enough current is not feasible to be applied all over the chip but only on the critical elements (preplaced complex logicblocks). Large number of elements switching to logic 0 might cause ground bounce due to large amount of current that needs to be sink at the same time, and switcing to logic 1 might cause voltage droop due to not enough current from the powersource to source needed current of all elements. Ground bounce and voltage droop might cause the voltage to not be within the noise margin range. The solution is to have multiple powersource taps (power mesh) where elements can source current from the nearest VDD and sink current to the nearest VSS tap. This is the reason why most chips have multiple powersource pins.
+
+
+
+**Pin placement**-Taking into account the inputs, outputs and preplaced cells, the netlist is defined (via VHDL/Verilog).
+Normally input and output pins are placed at opposite sides of the core.
+Pin placement also depends on where the logic blocks are placed - this requires a full understanding of the design.
+The communication ("handshake") between frontend team (that defined the network connectivity) and backend team (that defines the pin placement) is also critical.
+Clock ports are bigger in size, as the clock drives the flip flops and require more current/less resistance.
 </details>
