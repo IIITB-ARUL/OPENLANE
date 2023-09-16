@@ -203,4 +203,40 @@ Normally input and output pins are placed at opposite sides of the core.
 Pin placement also depends on where the logic blocks are placed - this requires a full understanding of the design.
 The communication ("handshake") between frontend team (that defined the network connectivity) and backend team (that defines the pin placement) is also critical.
 Clock ports are bigger in size, as the clock drives the flip flops and require more current/less resistance.
+
+
+![floorplan](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/fbd35697-9616-4dfe-b014-db930b7e1138)
+
+
+
+**Lab**
+
+**Run floorplan on OpenLane:** `% run_floorplan`
+
+ 
+**Check the results.** The output of this stage is `runs/[date]/results/floorplan/picorv32.def` which is a [design exchange format](https://teamvlsi.com/2020/08/def-file-in-vlsi-design-exchange.html), containing the die area and positions. 
+```
+...........
+DESIGN picorv32a ;
+UNITS DISTANCE MICRONS 1000 ;
+DIEAREA ( 0 0 ) ( 660685 671405 ) ;
+............
+```
+The die area here is in database units and 1 micron is equivalent to 1000 database units. **Thus area of the die is (660685/1000)microns\*(671405/1000)microns = 443587 microns squared.** 
+
+**View the layout on magic**. Open def file using `magic`:  
+
+```
+magic -T /home/arulvignesh/OpenLane/vsdstdcelldesign/libs/sky130A.tech lef read tmp/merged.nom.lef def read results/floorplan/picorv32a.def &
+
+```
+![floorplan1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/601facbc-1d47-4f34-9b93-2c7344326bf4)
+![floorplan2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/d079cbf6-7966-4366-8002-e2f99b30c7ad)
+![floorplan](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/9a94d940-f61a-461c-abe2-b2a73fe8b450)
+
+To center the view, press "s" to select whole die then press "v" to center the view. Point the cursor to a cell then press "s" to select it, zoom into it by pressing 'z". Type "what" in `tkcon` to display information of selected object. These objects might be IO pin, decap cell, or well taps as shown below.  
+
+
+![floorplan3](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/818c9f05-993e-4a6c-aafa-9ba96a1a5899)
+
 </details>
