@@ -205,6 +205,17 @@ The communication ("handshake") between frontend team (that defined the network 
 Clock ports are bigger in size, as the clock drives the flip flops and require more current/less resistance.
 
 
+
+Floorplan envrionment variables or switches:
+
+    FP_CORE_UTIL - floorplan core utilisation
+    FP_ASPECT_RATIO - floorplan aspect ratio
+    FP_CORE_MARGIN - Core to die margin area
+    FP_IO_MODE - defines pin configurations (1 = equidistant/0 = not equidistant)
+    FP_CORE_VMETAL - vertical metal layer
+    FP_CORE_HMETAL - horizontal metal layer
+
+
 ![floorplan](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/fbd35697-9616-4dfe-b014-db930b7e1138)
 
 
@@ -212,6 +223,16 @@ Clock ports are bigger in size, as the clock drives the flip flops and require m
 **Lab**
 
 **Run floorplan on OpenLane:** `% run_floorplan`
+
+
+Floorplan envrionment variables or switches:
+
+    FP_CORE_UTIL - floorplan core utilisation
+    FP_ASPECT_RATIO - floorplan aspect ratio
+    FP_CORE_MARGIN - Core to die margin area
+    FP_IO_MODE - defines pin configurations (1 = equidistant/0 = not equidistant)
+    FP_CORE_VMETAL - vertical metal layer
+    FP_CORE_HMETAL - horizontal metal layer
 
  
 **Check the results.** The output of this stage is `runs/[date]/results/floorplan/picorv32.def` which is a [design exchange format](https://teamvlsi.com/2020/08/def-file-in-vlsi-design-exchange.html), containing the die area and positions. 
@@ -244,4 +265,20 @@ To center the view, press "s" to select whole die then press "v" to center the v
   <summary>
     Library binding and placement
   </summary>
+
+
+**Placement**
+
+
+**Optimization**
+
+
 </details>
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+* [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
+* [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
+
+
