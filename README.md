@@ -364,9 +364,6 @@ Rise transition time = time(slew_high_rise_thr) - time (slew_low_rise_thr)
 Low transition time = time(slew_high_fall_thr) - time (slew_low_fall_thr)
 ```
 
-***Note:***
-1. A poor choice of threshold points leads to negative delay value. Therefore a correct choice of thresholds is very important.
-2. Huge wire delays also leads to negative delay value even when proper thresholds points are taken.
 
 </details>
 
@@ -388,6 +385,7 @@ Inception of Layout and CMOS Fabrication Process  </summary>
   <summary>
 Lab on SKY130 Tech File
 </details>
+
 
 
 <!-- ACKNOWLEDGEMENTS -->
