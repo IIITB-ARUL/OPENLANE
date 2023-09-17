@@ -575,6 +575,128 @@ Heavily doped impurity (N+ for NMOS and P+ for PMOS) is for the actual source an
 <details>
   <summary>
 Lab on SKY130 Tech File
+  </summary>
+
+
+
+
+
+### Layout and Metal Layers:
+
+When polysilicon crosses N-diffusion/P-diffusion (diffusion is also called implantation), then an NMOS/PMOS is created. [Explained here](https://electronics.stackexchange.com/questions/223973/why-diffusions-in-cmos-cad-tool-magic-is-continuous) is the reason why the diffusion layer of source and drain "seems" to be connected under the polysilicon (diffusion layer for source and drain supposedly be separated).
+
+
+The first layer is local-interconnect layer or local-i then metal 1 to 5. [Here is the process stack diagram](https://skywater-pdk.readthedocs.io/en/main/rules/assumptions.html) of sky130nm PDK. Metal 1 is for Power and Ground lines. `Nsubstratecontact` connects the N-well to locali. `licon` connects the locali to metal1.Locali is for local connections of cells. 
+
+The layer hierarchy for NMOS is: Psubstrate -> Psubstrate Diffusion (psd) -> Psubstrate Contact (psc) -> Local-interconnect (li) -> Mcon -> Metal1. For poly: Poly -> Polycontact -> Locali. P-substrate diffusion an N-substrate diffusion is also referred to as P-tap and N-tap. 
+
+The output of the layout is the LEF file. [LEF (Library Exchange Format)](https://teamvlsi.com/2020/05/lef-lef-file-in-asic-design.html) is used by the router tool in PnR design to get the location of standard cells pins to route them properly. So it is basically the abstract form of layout of a standard cell. `picorv32a/runs/[DATE]/tmp` contains the merged lef files (cell LEF and tech LEF). Notice how metal layer directon (horizontal or vertical) is alternating. Also, metal layer width and thickness is increasing. 
+
+### Magic Commands:  
+- Left click = lower-left corner of box  
+- Right click = upper-right corner of box  
+- "z" = zoom in, "Z" = zoom out, "ctrl + z" = zoom into the box 
+- Middle click on empty area will turn the box into empty (similar to erasing it)
+- "s" three times will select all geometries electrically connected to each other  
+- `:box` = display parameters of selected box  
+- `:grid` 0.5um 0.5um = turn on/off and set grid   
+- `:snap user` = snap based on current grid  
+- `:help snap` = display help for command  
+- `:drc style drc(full)` = use all DRC when doing DRC checking
+- `:paint poly` = paint "poly" to current box
+- `:drc why` = show drc violation inside selected area (white dots are DRC violations )
+- `:erase poly` = delete poly inside the box
+- `:select area` = select all geometries inside the box
+- `:copy n 30` = copy selected geometries to North by 30 grid steps
+- `:move n 1` = move selected geometries to North by 1 step ("." to move more, "u" to undo)  
+- `: select cell _08555_` = select a particular cell instance (e.g. cell \_08555_ which can be searched in the DEF file)
+- `:cellname allcells` = list all cells in the layout
+- `:cellname exists sky130_fd_sc_hd__xor3_4` = check if a cell exists 
+- `:drc why` = show DRC violation and also the DRC name which can be referenced from [Sky130 PDK Periphery Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html#rules-periphery--page-root).
+
+
+
+### Lab - Slew Rate and Propagation Delay Characterization:
+
+The task is to characterize a sample inverter cell by its slew rate and propagation delay.  
+
+
+
+ View the mag file using magic `magic -T sky130A.tech sky130_inv.mag &`:  
+ 
+ 
+![magiclayout](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/23f7ab5f-e1f2-4e45-afa3-d593265d2981)
+
+
+ Make an extract file `.ext` by typing `extract all` in the tkon terminal. 
+ Extract the `.spice` file from this ext file by typing `ext2spice cthresh 0 rthresh 0` then `ext2spice` in the tcon terminal.  
+
+
+We then modify the spice file to be able to plot a transient response:
+
+```
+* SPICE3 file created from sky130_inv.ext - technology: sky130A
+
+.option scale=0.01u
+.include ./libs/pshort.lib
+.include ./libs/nshort.lib
+
+* .subckt sky130_inv A Y VPWR VGND
+M0 Y A VGND VGND nshort_model.0 ad=1435 pd=152 as=1365 ps=148 w=35 l=23
+M1 Y A VPWR VPWR pshort_model.0 ad=1443 pd=152 as=1517 ps=156 w=37 l=23
+C0 A VPWR 0.08fF
+C1 Y VPWR 0.08fF
+C2 A Y 0.02fF
+C3 Y VGND 0.18fF
+C4 VPWR VGND 0.74fF
+* .ends
+
+* Power supply 
+VDD VPWR 0 3.3V 
+VSS VGND 0 0V 
+
+* Input Signal
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
+
+* Simulation Control
+.tran 1n 20n
+.control
+run
+.endc
+.end
+```  
+
+Open the spice file by typing `ngspice sky130A_inv.spice`. Generate a graph using `plot y vs time a` :  
+
+
+![ngspice1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/240baa41-403e-4033-810a-3a51a54c8362)
+
+
+![ngspice2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/ca26218f-111a-4678-a71a-880cae1ff4b2)
+
+
+
+Using this transient response, we will now characterize the cell's slew rate and propagation delay:  
+- Rise Transition [output transition time from 20%(0.66V) to 80%(2.64V)]:
+    - **Tr_r = 2.19981ns - 2.15739ns = 0.04242 ns**  
+
+
+- Fall Transition [output transition time from 80%(2.64V) to 20%(0.66V)]:
+   - **Tr_f = 4.0672ns - 4.04007ns = 0.02713ns**   
+
+
+- Rise Delay [delay between 50%(1.65V) of input to 50%(1.65V) of output]:
+   - **D_r = 2.18197ns - 2.15003ns = 0.03194ns**   
+
+
+- Fall Delay [delay between 50%(1.65V) of input to 50%(1.65V) of output]:
+   - **D_f = 4.05364ns - 4.05001ns =0.00363ns**  
+  
+
+
+
+
+  
 </details>
 
 
