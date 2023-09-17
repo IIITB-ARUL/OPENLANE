@@ -701,6 +701,25 @@ Using this transient response, we will now characterize the cell's slew rate and
 
 
 
+## Day 4
+
+<details>
+  <summary>
+    Timing modelling using delay tables
+  </summary>
+</details>
+
+
+
+<details>
+  <summary>
+    Timing analysis with ideal clocks using OpenSTA
+  </summary>
+</details>
+
+
+
+
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
