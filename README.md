@@ -307,8 +307,86 @@ magic -T /home/arulvignesh/Openlane/vsdstdcelldesign/libs/sky130A.tech lef read 
     Cell design and characterization flows
   </summary>
 
+**Library Characterization:**
+Of all RTL-to-GDSII stages, one common thing that the EDA tool always need is data from the library of gates which keeps all standards cells (and, or, buffer gates,...), macros, IPs, decaps, etc. Same cells might have different flavors inside the library (different sizes, delays, threshold voltage). Bigger cell sizes means bigger drive strength to drive longer and thicker wires. Bigger threshold voltage (due to bigger size) will take more time to switch(slower clock) than those with smaller threshold voltage.  
 
-  
+A single cell needs to go through the cell design flow. The inputs to make a single cell comes from the foundry Process Design Kits:
+ - DRC & LVS Rules = tech files and poly subtrate paramters (CUSTOME LAYOUT COURSE)
+ - SPICE Models  = Threshold, linear regions, saturation region equations with added foundry parameters. Including NMOS and PMOS parameteres (Ciruit Deisgn and Spice simulation Course)
+ - User defined Spec = Cell height (separation between power and ground rail), Cell width (depends on drive strength), supply voltage, metal layer requirement (which metal layer the cell needs to work)
+
+The library cell developer must adhere to the rules given on the inputs so that when the cell is used on a real design, there will be no errors. Next is design the library cell:
+1. Design the circuit function (Output: circuit design language (CDL))
+2. Model the pmos and nmos that meets input library requirement
+3. Layout the design using Euler's path and sticky diagram to produce best area. This can be done on `magic` layout tool.The outputs are:
+   - GDSII (layout file)
+   - LEF (defines the width and height of cell)
+   - extract spice netlist .cir (parasitics of each element of cell: resistance, capacitance)
+ Afte design is characterization using GUNA software, where the outputs are timing, noise, and power characterization.
+
+</details>
+<details>
+  <summary>
+    Timing charaterization
+  </summary>
+
+
+  ### Timing characterisation
+
+In standard cell characterisation, One of the classification of libs is timing characterisation.
+
+Timing defintion | Value
+------------ | -------------
+slew_low_rise_thr  | 20% value
+slew_high_rise_thr |  80% value
+slew_low_fall_thr | 20% value
+slew_high_fall_thr | 80% value
+in_rise_thr | 50% value
+in_fall_thr | 50% value
+out_rise_thr | 50% value
+out_fall_thr | 50% value
+
+### Propagation Delay and Transition Time
+
+#### Propagation Delay:
+The time difference between when the transitional input reaches 50% of its final value and when the output reaches 50% of its final value. Poor choice of threshold values lead to negative delay values. Even thought you have taken good threshold values, sometimes depending upon how good or bad the slew, the dealy might be still +ve or -ve.
+
+```
+Propagation delay = time(out_thr) - time(in_thr)
+```
+#### Transition Time:
+
+The time it takes the signal to move between states is the transition time , where the time is measured between 10% and 90% or 20% to 80% of the signal levels.
+
+```
+Rise transition time = time(slew_high_rise_thr) - time (slew_low_rise_thr)
+
+Low transition time = time(slew_high_fall_thr) - time (slew_low_fall_thr)
+```
+
+***Note:***
+1. A poor choice of threshold points leads to negative delay value. Therefore a correct choice of thresholds is very important.
+2. Huge wire delays also leads to negative delay value even when proper thresholds points are taken.
+
+</details>
+
+## Day 3
+<details>
+  <summary>
+    Cmos inverter using NGSPICE
+  </summary>
+</details>
+
+
+<details>
+  <summary>
+Inception of Layout and CMOS Fabrication Process  </summary>
+</details>
+
+
+<details>
+  <summary>
+Lab on SKY130 Tech File
 </details>
 
 
