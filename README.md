@@ -389,7 +389,7 @@ Low transition time = time(slew_high_fall_thr) - time (slew_low_fall_thr)
 
 ### SPICE Deck Netlist Description:  
 
-![image](https://user-images.githubusercontent.com/87559347/183240195-608727e5-2d04-4e44-ab4a-2df545cd13ea.png)
+![cmos](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/f4353e82-90e6-42c7-b778-e234674dd365)
 
 **Notes:**
  - Syntax for the PMOS and NMOS descriptiom:
@@ -422,7 +422,7 @@ Vin in 0 2.5
 ```  
 Below is the result of SPICE simulation for DC analysis, the line intersection is the switching threshold:  
 
-![image](https://user-images.githubusercontent.com/87559347/187056328-d6f6d5f5-4ce1-4454-9a5a-26be83a84734.png)
+![cmos1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/e1a3308c-d13f-4d81-a143-8aacb7756c0d)
 
 
 
@@ -436,7 +436,7 @@ Meanwhile, transient analysis is used for finding propagation delay. SPICE trans
 6. pulse-width of 1ns
 7. period of 2ns  
 
-![image](https://user-images.githubusercontent.com/87559347/187055752-dd66feae-f1e7-4b5b-a037-d1a148b01833.png)  
+![cmos2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/a63347c5-75d4-49e9-af26-db8fa98bce28)
 
 The simulation operation has 10ps step and ends at 4ns:  
 
@@ -448,7 +448,30 @@ Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n
 ```  
 Below is the result of SPICE simulation for transient analysis:
 
-![image](https://user-images.githubusercontent.com/87559347/187056370-18949899-a158-4307-96d9-d5c06bbeed66.png) 
+![cmos3](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/a42e7ef4-f5c2-4718-985f-a2fb4ad1dddf)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </details>
