@@ -270,7 +270,19 @@ To center the view, press "s" to select whole die then press "v" to center the v
 **Placement**
 
 
+
 **Optimization**
+
+
+
+**Run placement:** `% run_placement`. This commmand is a wrapper which does global placement (performed by RePlace tool), Optimization (by Resier tool), and detailed placement (by OpenDP tool). It displays hundreds of iterations displaying HPWL and OVFL. The algorithm is said to be converging if the overflow is decreasing. It also checks the legality. 
+
+**View the output of this stage**. The output of this stage is `runs/[date]/results/placement/picorv32a.placement.def.` To see actual layout after placement, open def file using `magic`:  
+
+```
+magic -T /home/arulvignesh/Openlane/vsdstdcelldesign/libs/sky130A.tech lef read tmp/merged.nom.lef def read results/placement/picorv32.def &
+```
+
 
 
 </details>
