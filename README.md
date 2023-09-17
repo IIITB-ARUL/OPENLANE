@@ -269,10 +269,22 @@ To center the view, press "s" to select whole die then press "v" to center the v
 
 **Placement**
 
+First we need to bind the netlist with physical cells. We have shapes for OR, AND and every cell for pratice purpose. But in reality we dont have such shapes, we have give an physical dimensions like rectangles or squares weight and width. This information is given in libs and lefs. Now we place these cells in our design by initilaising it.
+
+![placement1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/0cb284b4-ecec-45f2-8d07-dae5ab220739)
+![placement2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/d2126daf-d80d-4583-9c8a-d0dfd382dc14)
+
 
 
 **Optimization**
 
+The next step is placement. Once we initial the design, the logic cells in netlist in its physical dimisoins is placed on the floorplan. Placement is perfomed in 2 stages:
+
+Global Placement: Cells will be placed randomly in optimal positions which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length. Detailed Placement: It alters the position of cells post global placement so as to legalise them. Legalisation of cells is important from timing point of view.
+
+Optimization is stage where we estimate the lenght and capictance, based on that we add buffers. Ideally, Optimization is done for better timing.
+
+![placement3](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/d3f85659-9c29-4df4-bf4d-89016cc08b80)
 
 
 **Run placement:** `% run_placement`. This commmand is a wrapper which does global placement (performed by RePlace tool), Optimization (by Resier tool), and detailed placement (by OpenDP tool). It displays hundreds of iterations displaying HPWL and OVFL. The algorithm is said to be converging if the overflow is decreasing. It also checks the legality. 
@@ -282,9 +294,21 @@ To center the view, press "s" to select whole die then press "v" to center the v
 ```
 magic -T /home/arulvignesh/Openlane/vsdstdcelldesign/libs/sky130A.tech lef read tmp/merged.nom.lef def read results/placement/picorv32.def &
 ```
+![placementOL](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/86cd041a-7df4-4730-829e-4bb8d4646fbe)
+
+![placementOL1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/a3289db5-185c-43ba-a36d-0e63682e6363)
+![placementOL2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/c9c5e61e-5675-4984-9b0f-ab283bc5e71e)
 
 
+</details>
 
+<details>
+  <summary>
+    Cell design and characterization flows
+  </summary>
+
+
+  
 </details>
 
 
