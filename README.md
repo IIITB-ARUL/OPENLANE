@@ -372,6 +372,85 @@ Low transition time = time(slew_high_fall_thr) - time (slew_low_fall_thr)
   <summary>
     Cmos inverter using NGSPICE
   </summary>
+
+
+ Configurations on OpenLANE can be changed on the flight. For example, to change IO_mode to be not equidistant, use `% set ::env(FP_IO_MODE) 2;` on OpenLANE. The IO pins will not be equidistant on mode 2 (default of 1). Run floorplan again via `% run_floorplan` and view the def layout on magic. However, changing the configuration on the fly will not change the `runs/config.tcl`, the configuration will only be available on the current session. To echo current value of variable: `echo $::env(FP_IO_MODE)`
+
+
+### Designing a Library Cell:
+1. SPICE deck = component connectivity (basically a netlist) of the CMOS inverter.
+2. SPICE deck values = value for W/L (0.375u/0.25u means width is 375nm and lengthis 250nm). PMOS should be wider in width(2x or 3x) than NMOS. The gate and supply voltages are normally a multiple of length (in the example, gate voltage can be 2.5V)  
+3. Add nodes to surround each component and name it. This will be used in SPICE to identify a component.    
+
+**Notes:**
+ - Width is the length of source and drain. Length is the distance between source and drain
+ - PMOS' hole carrier is slower than NMOS' electron carrier mobility, so to match the rise and fall time PMOS must be thicker (less resistance thus higher mobility) than NMOS  
+ - A good refresher on MOSFETS and CMOS [is this video](https://www.youtube.com/watch?v=oSrUsM0hoPs) and [this site.](http://courseware.ee.calpoly.edu/~dbraun/courses/ee307/F02/02_Shelley/Section2_BasilShelley.htm)
+
+### SPICE Deck Netlist Description:  
+
+![image](https://user-images.githubusercontent.com/87559347/183240195-608727e5-2d04-4e44-ab4a-2df545cd13ea.png)
+
+**Notes:**
+ - Syntax for the PMOS and NMOS descriptiom:
+     - `[component name] [drain] [gate] [source] [substrate] [transistor type] W=[width] L=[length]`
+ - All components are described based on nodes and its values
+ - `.op` is the start of SPICE simulation operation where Vin will be sweep from 0 to 2.5 with 0.5 steps
+ - `tsmc_025um_model.mod` is the model file containing the technological parameters for the 0.25um NMOS and PMOS
+The steps to simulate in SPICE:
+```
+source [filename].cir
+run
+setplot 
+dc1 
+plot out vs in 
+```  
+
+### SPICE Analysis for Switching Threshold and Propagation Delay:
+CMOS robustness depends on:  
+
+1. Switching threshold = Vin is equal to Vout. This the point where both PMOS and NMOS is in saturation or kind of turned on, and leakage current is high. If PMOS is thicker than NMOS, the CMOS will have higher switching threshold (1.2V vs 1V) while threshold will be lower when NMOS becomes thicker.
+
+2. Propagation delay = rise or fall delay
+
+DC transfer analysis is used for finding switching threshold. SPICE DC analysis below uses DC input of 2.5V. Simulation operation is DC sweep from 0V to 2.5V by 0.05V steps:
+```
+Vin in 0 2.5
+*** Simulation Command ***
+.op
+.dc Vin 0 2.5 0.05
+```  
+Below is the result of SPICE simulation for DC analysis, the line intersection is the switching threshold:  
+
+![image](https://user-images.githubusercontent.com/87559347/187056328-d6f6d5f5-4ce1-4454-9a5a-26be83a84734.png)
+
+
+
+
+Meanwhile, transient analysis is used for finding propagation delay. SPICE transient analysis uses pulse input: 
+1. starts at 0V
+2. ends at 2.5V
+3. starts at time 0
+4. rise time of 10ps
+5. fall time of 10ps
+6. pulse-width of 1ns
+7. period of 2ns  
+
+![image](https://user-images.githubusercontent.com/87559347/187055752-dd66feae-f1e7-4b5b-a037-d1a148b01833.png)  
+
+The simulation operation has 10ps step and ends at 4ns:  
+
+```
+Vin in 0 0 pulse 0 2.5 0 10p 10p 1n 2n 
+*** Simulation Command ***
+.op
+.tran 10p 4n
+```  
+Below is the result of SPICE simulation for transient analysis:
+
+![image](https://user-images.githubusercontent.com/87559347/187056370-18949899-a158-4307-96d9-d5c06bbeed66.png) 
+
+
 </details>
 
 
