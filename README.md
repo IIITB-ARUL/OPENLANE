@@ -742,6 +742,9 @@ PnR tool does not need all informations from the `.mag` file like the logic part
 ```
  grid 0.46um 0.34um 0.23um 0.17um 
 ````
+
+![grid1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/5fd75363-a233-40c0-9bb5-9801768326aa)
+
   
 </details>
 
