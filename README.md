@@ -480,6 +480,95 @@ Below is the result of SPICE simulation for transient analysis:
 <details>
   <summary>
 Inception of Layout and CMOS Fabrication Process  </summary>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ### CMOS Fabrication Process (16-Mask CMOS Process):  
+ **1. Selecting a substrate** = Layer where the IC is fabricated. Most commonly used is P-type substrate  
+ **2. Creating active region for transistor** = Separate the transistor regions using SiO2 as isolation
+  - Mask 1 = Covers the photoresist layer that must not be etched away (protects the two transistor active regions)
+  - Photoresist layer = Can be etched away via UV light  
+  - Si3N4 layer = Protection layer to prevent SiO2 layer to grow during oxidation (oxidation furnace)  
+  - SiO2 layer = Grows during oxidation (LOCOS = Local Oxidation of Silicon) and will act as isolation regions between transistors or active regions  
+  
+![cmos4](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/6d201027-5edb-42fb-b559-a59b9d2d10a4)
+
+ **3. N-Well and P-Well Fabrication** = Fabricate the substrate needed by PMOS (N-Well) and NMOS (P-Well)  
+  - Phosporus (5 valence electron) is used to form N-well  
+  - Boron (3 valence electron) is used to form P-Well.  
+  - Mask 2 protects the N-Well (PMOS side) while P-Well (NMOS side) is being fabricated then Mask 3 while N-Well (PMOS side) is being fabricated
+   
+![cmos5](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/3cb7d833-3002-41de-8885-a1b9990a0106)
+
+ **4. Formation of Gate** = Gate fabrication affects threshold voltage. Factors affecting threshold voltage includes:    
+ 
+![cmos6](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/08192c17-df5a-4513-95fe-b42ba36b3622)
+
+Main parameters are:
+  - Doping Concentration = Controlled by ion implantation (Mask 4 for Boron implantation in NMOS P-Well and Mask 5 for Arsenic implantation in PMOS N-Well)
+  - Oxide capacitance = Controlled by oxide thickness  (SiO2 layer is removed then rebuilt to the desire thickness)  
+  
+ Mask 6 is for gate formation using polysilicon layer.
+ 
+![cmos7](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/49de0092-8946-4db6-a98a-daeedaa8b8ff)
+**5. Lightly Doped Drain formation** = Before forming the source and drain layer, lightly doped impurity is added: 
+ - Mask 7 for N- implantation (lightly doped N-type) for NMOS 
+ - Mask 8 for P- implantation (lightly doped P-type) for PMOS.  
+Heavily doped impurity (N+ for NMOS and P+ for PMOS) is for the actual source and drain but the lightly doped impurity will help maintain spacing between the source and drain and prevent hot electron effect and short channel effect. 
+
+![cmos8](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/8a54d16a-43ba-4262-87a7-3cf575fe35bc)
+**6. Source and Drain Formation** = Mask 9 is for N+ implantation and Mask 10 for P+ implantation  
+ - Channeling is when implantations dig too deep into substrate so add screen oxide before implantation
+ - The side-wall spacers maintains the N-/P- while implanting the N+/P+    
+ 
+![cmos9](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/edf6646a-79d2-4d44-88b6-3af86d69938e)
+
+**7. Form Contacts and Interconnects** =  TiN is for local interconnections and also for bringing contacts to the top. TiS2 is for the contact to the actual Drain-Gate-Source. Mask 11 is for etching off the TiN interconnect for the first layer contact. 
+
+![cmos10](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/7a631789-8398-4328-9224-6f5b8dced37d)
+
+**8. Higher Level Metal Formation** = We need to planarize first the layer via CMP before adding a metal interconnect. Aluminum contact is used to connect the lower contact to higher metal layer. Process is repeated until the contact reached the outermost layer.
+ - Mask 12 is for first contact hole
+ - Mask 13 is for first Aluminum contact layer
+ - Mask 14 is for second contact hole
+ - Mask 15 is for second Aluminum contact layer. Mask 16 is for making contact to topmost layer. 
+ 
+![cmos11](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/32e288b1-ecd8-4891-9391-71181b8e07f9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 </details>
 
 
