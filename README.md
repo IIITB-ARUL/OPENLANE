@@ -707,6 +707,42 @@ Using this transient response, we will now characterize the cell's slew rate and
   <summary>
     Timing modelling using delay tables
   </summary>
+
+
+
+To run previous flow, add tag to prep design:
+```
+prep -design picorv32a -tag [date]
+```
+### Lab Part 1 [Day 4] - Extracting the LEF File:   
+PnR tool does not need all informations from the `.mag` file like the logic part but only PnR boundaries, power/ground ports, and input/output ports. This is what a [LEF file](https://teamvlsi.com/2020/05/lef-lef-file-in-asic-design.html) actually contains. So the next step is to extract the LEF file from Magic. But first, we need to follow guidelines of the PnR tool for the standard cells:
+ - The input and output ports lies on the intersection of the horizontal and vertical tracks (ensure the routes can reach that ports). 
+ - The width of the standard cell must be odd multiple of the tracks horizontal pitch and height must be odd multiples of tracks vertical pitch   
+ 
+ To check these guidelines, we need to change the grid of Magic to match the actual metal tracks. The `cd .volare/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info` contains those metal informations.   
+
+
+ The file consists of 
+
+```
+  li1 X 0.23 0.46  //0.46um is the width  
+  li1 Y 0.17 0.34  //0.34um is the height 
+  met1 X 0.17 0.34
+  met1 Y 0.17 0.34
+  met2 X 0.23 0.46
+  met2 Y 0.23 0.46
+  met3 X 0.34 0.68
+  met3 Y 0.34 0.68
+  met4 X 0.46 0.92
+  met4 Y 0.46 0.92
+  met5 X 1.70 3.40
+  met5 Y 1.70 3.40
+```
+1. Use `grid` command inside the tkon terminal to match the tracks informations:
+```
+ grid 0.46um 0.34um 0.23um 0.17um 
+````
+  
 </details>
 
 
@@ -722,7 +758,16 @@ Using this transient response, we will now characterize the cell's slew rate and
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)](https://github.com/kunalg123)
-* [Nickson Jose - VSD VLSI Engineer](https://github.com/nickson-jose)
+* Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)
+* Nickson Jose - VSD VLSI Engineer
+* Chatgpt
+* N Sai Sampath,Colleague,IIIT-B
 
+
+## Reference
+
+- https://www.vsdiat.com
+- https://github.com/Devipriya1921/Physical_Design_Using_OpenLANE_Sky130
+- https://github.com/nickson-jose/vsdstdcelldesign
+- https://github.com/AngeloJacobo/OpenLANE-Sky130-Physical-Design-Workshop
 
