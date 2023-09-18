@@ -1017,9 +1017,12 @@ report_checks -path_delay min_max -format full_clock_expanded -digits 4
 - Since, clock is propagated, from this stage, we do timing analysis with real clocks. From now post cts analysis is performed by operoad within the openlane flow
 
 - *Hold Slack*
+![slack1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/8220d016-c91f-4130-b693-b80d97eda31f)
+
 
 - *Setup Slack*
 
+![slack2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/9759f8bb-769d-435a-ba95-6ae994cf1ae6)
 
  
 </details>
