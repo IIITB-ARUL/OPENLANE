@@ -1134,6 +1134,8 @@ Start routing by using
 run_routing
 ```
 
+![runrouting](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/e6907bce-8842-4993-be2f-c66ac0d83ffa)
+
 
 The optimisations in routing can also be done by specifying the routing strategy to use different version of TritonRoute Engine. There is a tradeoff between the optimised route and the runtime for routing.
 
@@ -1151,6 +1153,9 @@ The design can be viewed on magic within results/routing directory. Run the foll
 ```
 
 ![WhatsApp Image 2023-09-17 at 18 11 07](https://github.com/NSampathIIITB/Advanced_Physical_Design_Using_OpenLANE-sky130/assets/141038460/e07e39f3-a7f6-4250-b112-45992dba9a6c)
+
+
+### Layout view of sky130_vsdinv
 
 </details>
 
