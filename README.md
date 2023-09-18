@@ -1064,6 +1064,46 @@ The layout of a design must be in accordance with a set of predefined technology
 </details>
 
 
+
+
+
+
+<details>
+
+<summary><strong> Power Distribution Network and Routing </strong></summary>
+
+- Unlike the general ASIC flow, Power Distribution Network generation is not a part of floorplan run in OpenLANE. PDN must be generated after CTS and post-CTS STA analyses:
+- We can check whether PDN has been created or no by check the current def environment variable:  ``` echo $::env(CURRENT_DEF) ```
+
+```bash
+gen_pdn
+```
+
+
+- log file generated
+
+
+- gen_pdn Generates the power distribution network.
+
+- The power distribution network has to take the design_cts.def as the input def file.
+
+- Power rings,strapes and rails are created by PDN.
+
+- From VDD and VSS pads, power is drawn to power rings.
+
+- Next, the horizontal and vertical strapes connected to rings draw the power from strapes.
+
+- Stapes are connected to rings and these rings are connected to std cells. So, standard cells get power from rails.
+
+- Here are definitions for the straps and the rails. In this design, straps are at metal layer 4 and 5 and the standard cell rails are at the metal layer 1. Vias connect accross the layers as required.
+
+![image](https://github.com/Shant1R/Advanced-Physical-Design-using-Openlane/assets/59409568/46790b86-9fde-4c1d-aabd-a49b5366f4d4)
+
+
+
+</details>
+
+
 <details>
 	<summary>
 		Routing
