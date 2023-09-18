@@ -864,6 +864,29 @@ Delay tables are used to capture the timing model of each cell and is included i
 Notice how skew is zero since delay for both clock path is x9'+y15.
 
 
+
+
+
+***Custom Cell inclusion in OpenLane Flow***
+
+- We have seen till the synthesis for the custom standard cell in OpenLane flow, and verified the synthesis and STA log files. We will pick it from there now.
+- First check the slack for the synthesis.
+
+- The slack was positive, therefore we can proceed, else would have to work on the slack.
+- Now we run the floorplan and placement processes.
+```bash
+run_floorplan
+run_placement
+```
+
+
+- Now, we check for legality &To check the layout invoke magic from the ```results/placement``` directory
+
+
+- The cell manager shows that the custom cell ```sky130_vsdinv (_15551_)``` has been instantiated. We try to located the cell view now. 
+
+
+
   
 </details>
 
