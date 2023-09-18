@@ -957,10 +957,15 @@ The below command is used to run CTS in OpenLANE.
 ```
 run_cts
 ```
-![run_cts](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/dbdd3e21-b2c4-4994-8196-4eb1a6b15eb0)
 
 
-![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/427a0679-0ee3-4f14-adca-175ef6719174)
+![runcts](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/b3c19a9c-088b-4167-a6c3-5b2dd49c740a)
+
+
+![sta](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/c51c4500-6c15-4fe8-8e73-ecc66fe3fced)
+
+![log1](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/21c7571e-857f-409e-8d0e-333804a1f588)
+![sta2](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/b25e6ac0-8edb-4455-9ef7-afe5d407747d)
 
 After CTS run, my slack values are ``setup:12.36, Hold:0.38``
 Here also both values are not violating.
@@ -972,7 +977,7 @@ Here also both values are not violating.
 
 <details>
 
-<summary><strong> Timing Analysis with Real Clocks using OpenSTA </strong></summary>
+<summary> Timing Analysis with Real Clocks using OpenSTA </summary>
 
 ***Setup Timing Analysis using Real Clocks***
 - Analyzing setup time is a crucial element of designing digital circuits, especially in synchronous digital systems.
