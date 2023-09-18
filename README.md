@@ -1211,6 +1211,7 @@ The design can be viewed on magic within results/routing directory. Run the foll
 * Nickson Jose - VSD VLSI Engineer
 * Chatgpt
 * N Sai Sampath,Colleague,IIIT-B
+* Alwinshaju,Colleague,IIIT-B
 
 
 ## Reference
