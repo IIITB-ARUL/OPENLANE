@@ -967,6 +967,7 @@ After CTS run, my slack values are ``setup:12.36, Hold:0.38``
 Here also both values are not violating.
 
 
+</details>
 
 
 <!-- ACKNOWLEDGEMENTS -->
