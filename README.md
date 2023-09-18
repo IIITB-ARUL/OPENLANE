@@ -1211,7 +1211,7 @@ For the default setting picorv32a takes approximately 30 minutes according to th
 
 Here drc violation is zero.
 
-### Layout in magic tool post routing: 
+**Layout view using MAGIC**
 
 The design can be viewed on magic within results/routing directory. Run the follwing command in that directory:
 
@@ -1222,10 +1222,6 @@ The design can be viewed on magic within results/routing directory. Run the foll
 
 ![WhatsApp Image 2023-09-17 at 18 11 07](https://github.com/NSampathIIITB/Advanced_Physical_Design_Using_OpenLANE-sky130/assets/141038460/e07e39f3-a7f6-4250-b112-45992dba9a6c)
 
-
-### Layout view of sky130_vsdinv
-
-![WhatsApp Image 2023-09-18 at 6 59 17 PM](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/5910c271-962f-4ba3-8bf5-9014966c7d4a)
 
 
 </details>
