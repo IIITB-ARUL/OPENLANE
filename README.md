@@ -968,6 +968,63 @@ Here also both values are not violating.
 
 </details>
 
+
+
+<details>
+
+<summary><strong> Timing Analysis with Real Clocks using OpenSTA </strong></summary>
+
+***Setup Timing Analysis using Real Clocks***
+- Analyzing setup time is a crucial element of designing digital circuits, especially in synchronous digital systems.
+- It pertains to the duration during which a signal must remain steady and valid prior to the arrival of the clock edge.
+- Guaranteeing the fulfillment of setup time prerequisites is vital for averting data errors and securing the correct functioning of the digital circuit.
+
+![image](https://github.com/Shant1R/Advanced-Physical-Design-using-Openlane/assets/59409568/773db2c6-a1c5-4d7e-a92f-a2a43602c6bc)
+
+
+- To ensure the setup time requirements are met we need to make sure of some things:
+  - Selecting proper Filp flops or latches.
+  - Optimize combinational logic
+  - Clock Skew Analysis
+  - Timing constraints
+
+- Meeting setup time requrirements is cruical for a good digital circuit operation. If not done can result in data errors and multifunctioning of the circuit.
+
+***Holding Timing Analysis using Real Clock***
+- Analysis of hold time is an equally vital component of digital circuit design, especially in synchronous systems.
+- It concerns the minimum duration during which a data input (D) needs to maintain its stability and validity after the clock edge before any changes can occur.
+- Ensuring that hold time requirements are met is essential to prevent data corruption and ensure the proper operation of digital circuits.
+
+![image](https://github.com/Shant1R/Advanced-Physical-Design-using-Openlane/assets/59409568/7a6c57f6-5307-4aea-9324-626f6c665268)
+
+***LAB Continued***
+
+```bash
+openroad
+read_lef /home/arulvignesh/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_17.33.42/tmp/merged.nom.lef 
+read_def /home/arulvignesh/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_17.33.42/results/cts/picorv32.def 
+read_verilog /home/arulvignesh/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_17.33.42/results/synthesis/picorv32.v
+write_db pico_cts.db
+read_db pico_cts.db
+read_verilog /home/arulvignesh/OpenLane/designs/picorv32a/runs/RUN_2023.09.18_17.33.42/results/synthesis/picorv32.v
+link_design picorv32
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+read_sdc /home/arulvignesh/OpenLane/designs/picorv32a/src/my_base.sdc
+set_propagated_clock (all_clocks)
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
+
+- Since, clock is propagated, from this stage, we do timing analysis with real clocks. From now post cts analysis is performed by operoad within the openlane flow
+
+- *Hold Slack*
+
+- *Setup Slack*
+
+
+ 
+</details>
+
+
 ## DAY5 
 <details>
       <summary> Maze routing and Lee's Algorithm </summary>
