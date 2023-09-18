@@ -641,24 +641,24 @@ We then modify the spice file to be able to plot a transient response:
 .include ./libs/pshort.lib
 .include ./libs/nshort.lib
 
-* .subckt sky130_inv A Y VPWR VGND
-M0 Y A VGND VGND nshort_model.0 ad=1435 pd=152 as=1365 ps=148 w=35 l=23
-M1 Y A VPWR VPWR pshort_model.0 ad=1443 pd=152 as=1517 ps=156 w=37 l=23
-C0 A VPWR 0.08fF
-C1 Y VPWR 0.08fF
-C2 A Y 0.02fF
-C3 Y VGND 0.18fF
-C4 VPWR VGND 0.74fF
-* .ends
+//.subckt sky130_inv A Y VPWR VGND
+M1000 Y A VGND VGND nshort_model.0 w=35 l=23
++  ad=1.44n pd=0.152m as=1.37n ps=0.148m
+M1001 Y A VPWR VPWR pshort_model.0 w=37 l=23
++  ad=1.44n pd=0.152m as=1.52n ps=0.156m
 
-* Power supply 
-VDD VPWR 0 3.3V 
-VSS VGND 0 0V 
-
-* Input Signal
+VDD VPWR 0 3.3V
+VSS VGND 0 0V
 Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
 
-* Simulation Control
+C0 A VPWR 0.0774f
+C1 VPWR Y 0.117f
+C2 A Y 0.0754f
+C3 Y VGND 2f
+C4 A VGND 0.45f
+C5 VPWR VGND 0.781f
+//.ends
+
 .tran 1n 20n
 .control
 run
