@@ -1157,6 +1157,9 @@ The design can be viewed on magic within results/routing directory. Run the foll
 
 ### Layout view of sky130_vsdinv
 
+![WhatsApp Image 2023-09-18 at 6 59 17 PM](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/5910c271-962f-4ba3-8bf5-9014966c7d4a)
+
+
 </details>
 
 
