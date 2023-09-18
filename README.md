@@ -878,13 +878,16 @@ Notice how skew is zero since delay for both clock path is x9'+y15.
 run_floorplan
 run_placement
 ```
+![runplacement](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/2efad8e2-c890-47c7-8eb6-431d99496729)
 
 
 - Now, we check for legality &To check the layout invoke magic from the ```results/placement``` directory
+![15552](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/be5b097e-a7e1-447b-83dc-f6dec82e2bb6)
 
 
 - The cell manager shows that the custom cell ```sky130_vsdinv (_15551_)``` has been instantiated. We try to located the cell view now. 
 
+![15551](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/ba30cde9-eeb5-4d67-8660-8452582c59a5)
 
 
   
