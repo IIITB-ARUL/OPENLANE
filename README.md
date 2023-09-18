@@ -732,8 +732,7 @@ MAGIC
 ```
 magic -d XR
 ```
-- To open a file we can load the file as such:
-![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/1a5c9ee6-4bc9-4010-8949-fec441ed40d8)
+
 
 - Other way to load it is by defining the name while running magic.
 ```
