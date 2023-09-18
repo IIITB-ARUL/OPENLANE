@@ -1202,7 +1202,7 @@ Start routing by using
 run_routing
 ```
 
-![runrouting](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/e6907bce-8842-4993-be2f-c66ac0d83ffa)
+![2222](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/d715c7d3-e758-4f59-b727-0f02cf5426f0)
 
 
 The optimisations in routing can also be done by specifying the routing strategy to use different version of TritonRoute Engine. There is a tradeoff between the optimised route and the runtime for routing.
@@ -1210,6 +1210,17 @@ The optimisations in routing can also be done by specifying the routing strategy
 For the default setting picorv32a takes approximately 30 minutes according to the current version of TritonRoute.
 
 Here drc violation is zero.
+
+
+**Post Routing**
+
+
+![stalogrouting](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/0bf907b4-67f0-4f06-ad85-0a3a69740de9)
+
+
+![333333](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/25f555be-a96a-4557-be9f-0c7f4f19766d)
+
+
 
 **Layout view using MAGIC**
 
