@@ -1218,7 +1218,7 @@ Here drc violation is zero.
 ![stalogrouting](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/0bf907b4-67f0-4f06-ad85-0a3a69740de9)
 
 
-![333333](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/25f555be-a96a-4557-be9f-0c7f4f19766d)
+![4444](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/724eb9e1-5ecb-4de1-a220-27644cb29cc7)
 
 
 
