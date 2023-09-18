@@ -907,7 +907,7 @@ The result of running STA in OpenROAD will be exactly the same as the log result
 3. To further reduce the negative slack, we can also try upsizing the cell with high fanout so bigger driver will be used. High fanout results in high load cap which then results in high delay. But since we cannot change the load cap, we can just change the cell size to better drive that large cap load for less delay. As shown below, cell `_41882_` has a high cap load of 0.04nF and this causes a large delay due to `buf_1` not having enough drive strength to drive that high cap load. We can try upsizing the `buf_1` to `buf_4` (listed on the used liberty files are all cells which you can choose) inside OpenSTA: `replace_cell _41882_ sky130_fd_sc_hd__buf_4` 
 ![image](https://user-images.githubusercontent.com/87559347/189793281-6acff965-b4d1-48a8-a6c3-17d312f901a2.png)
 
-This can be done iteratively until desired slack is reached, this is called timing ECO (Engineering Change Order). To extract the modified verilog netlist: `write_verilog designs/picorv32a/runs/RUN_2022.09.14_05.18.35/results/synthesis/picorv32.v`. Beware that upsizing the cell will naturally increase core size. 
+This can be done iteratively until desired slack is reached, this is called timing ECO (Engineering Change Order). To extract the modified verilog netlist: `write_verilog designs/picorv32a/runs/RUN_2023.09.17_05.17.425/results/synthesis/picorv32.v`. Beware that upsizing the cell will naturally increase core size. 
 
 ### Summary of OpenSTA Commands:  
 ```
@@ -918,7 +918,7 @@ report_checks -from _18671_ -to _18739_ -fields {cap slew nets} -digits 4
 report_wns
 report_tns
 report_worst_slack -max
-write_verilog designs/picorv32a/runs/RUN_2022.09.14_05.18.35/results/synthesis/picorv32.v
+write_verilog designs/picorv32a/runs/RUN_2023.09.17_05.17.42/results/synthesis/picorv32.v
 ```
 </details>
 
@@ -1070,7 +1070,7 @@ The layout of a design must be in accordance with a set of predefined technology
 
 <details>
 
-<summary><strong> Power Distribution Network and Routing </strong></summary>
+<summary> Power Distribution Network and Routing </summary>
 
 - Unlike the general ASIC flow, Power Distribution Network generation is not a part of floorplan run in OpenLANE. PDN must be generated after CTS and post-CTS STA analyses:
 - We can check whether PDN has been created or no by check the current def environment variable:  ``` echo $::env(CURRENT_DEF) ```
@@ -1078,9 +1078,11 @@ The layout of a design must be in accordance with a set of predefined technology
 ```bash
 gen_pdn
 ```
+![genpdn](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/879515c4-0852-423b-92af-d5fcde462dcf)
 
 
 - log file generated
+![14pdn](https://github.com/IIITB-ARUL/Physical_design_using_OPENLANE/assets/140998631/8fff8b72-157f-49f4-9663-866dd428dd0d)
 
 
 - gen_pdn Generates the power distribution network.
