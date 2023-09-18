@@ -969,6 +969,37 @@ Here also both values are not violating.
 
 </details>
 
+## DAY5 
+<details>
+      <summary> Maze routing and Lee's Algorithm </summary>
+
+---
+Routing is the process of establishing a physical connection between two pins. Algorithms designed for routing take source and target pins and aim to find the most efficient path between them, ensuring a valid connection exists.
+
+The Maze Routing algorithm, such as the Lee algorithm, is one approach for solving routing problems.Here a grid similar to the one created during cell customization is utilized for routing purposes.
+The Lee algorithm starts with two designated points, the source and target, and leverages the routing grid to identify the shortest or optimal route between them.
+
+Lee's Algorithm has its limitations. It can be time consuming when dealing with millions of pins.It essentially constructs a maze and then numbers its cells from the source to the target. here are alternative algorithms that address similar routing challenges.
+
+Here in this case he shortest path is one that follows a steady increment of one.There might be multiple paths, but the best path that the tool will choose is one with less bends.The route should not be diagonal and must not overlap an obstruction such as macros. The Lee algorithm prioritizes selecting the best path, typically favoring L-shaped routes over zigzags. If no L-shaped paths are available, it may resort to zigzag routes. This approach is particularly valuable for global routing tasks.
+
+This algorithm however has high run time and consume a lot of memory thus more optimized routing algorithm is preferred .
+
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/4ab58f1b-3999-42ff-b722-f30ac2bcda45)
+
+Design Rule Check
+==================
+
+Design rule checks are physical checks of metal width, pitch and spacing requirement for the different layers which depend on different technology nodes.It verifies whether a design meets the predefined process technology rules given by the foundry for its manufacturing.
+
+The layout of a design must be in accordance with a set of predefined technology rules given by the foundry for manufacturability. After completion of the layout and its physical connection, an automatic program will check each and every polygon in the design against these design rules and report any violations.
+
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/90753419-6485-48ab-9da4-84cfa30318f3)
+
+
+</details>
+
+
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
