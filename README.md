@@ -694,6 +694,106 @@ Using this transient response, we will now characterize the cell's slew rate and
   
 
 
+DRC Challenges
+==============
+
+Under this section, we will go over
+
+- In-depth overview of Magic's DRC engine
+- Introduction to Google/Skywater DRC rules
+- Lab : Warm-up exercise : Fixing a simple rule error
+- Lab : Main exercie : Fixing or create a complex error
+
+Introdution to Magic and Skywater PDK
+====================================
+For running the DRC we need to have an understanding of the technology node we are working on. For this one can refer the following
+
+- Magic --> [link]([https://www.github.com](http://opencircuitdesign.com/magic/))
+- Skywater PDK 
+- Github Repo for Skywater PDK --> [github](https://github.com/google/skywater-pdk)
+
+Lab Setup
+========
+
+- Setup to view the layouts
+- For extracting and generating views, Google/skywater repo files were built with Magic
+- Technology file dependency is more for any layout. hence, this file is created first.
+- Since, Pdk is still under development, there are some unfinished tech files and these are packaged for magic along with lab exercise layout and bunch of stuff into the tar ball
+```
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+```
+- Once we have downloaded the archive in the home directory, we extract it to get the lab .mag files
+- There is a hidden file ``.magicrc`` which directs to the various resources for the lab work ahead.
+
+MAGIC
+=====
+
+- Run Magic.For better graphic use, the command belwo is used:
+```
+magic -d XR
+```
+- To open a file we can load the file as such:
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/1a5c9ee6-4bc9-4010-8949-fec441ed40d8)
+
+- Other way to load it is by defining the name while running magic.
+```
+magic -d XR <file_name>.mag
+```
+
+- We will open up met3.mag
+- We see multiple independent example metal layouts with some DRC errors. We can refer these errors in the the Skywater PDK design rules which are flageed in the DRC engine.
+- We can make a frame around a metal region and in command window write drc why --> this gives us the DRC violated.
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/64ced32f-ff4b-49a0-87d7-de23971032ec)
+
+
+- Magic uses a lot of derived layers. To see these layers we can make a large box area and use following commands to see metal cut
+```
+cif see VIA2
+```
+LAB
+===
+
+**Exercise-1**
+- Load the poly.mag
+- Check the drc violation for poly.9
+- Refer the error using skywater pdk design rules
+   - We find that distance between regular polysilicon & poly resistor should be 22um but it is showing 17um and still no errors . We should go to sky130A.tech file and modify as follows to detect this error.
+- In line this,
+```
+*******************************************************
+spacing npres *nsd 480 touching_illegal \
+	"poly.resistor spacing to N-tap < %d (poly.9)"
+*******************************************************
+```
+- Edit as shown.
+```
+*******************************************************
+spacing npres allpolynonres 480 touching_illegal \
+	"poly.resistor spacing to N-tap < %d (poly.9)"
+*******************************************************
+```
+
+- Now the second edit. In line this.
+```
+*******************************************************
+spacing xhrpoly,uhrpoly,xpc alldiff 480 touching_illegal \
+	"xhrpoly/uhrpoly resistor spacing to diffusion < %d (poly.9)"
+*******************************************************
+```
+- Edit as shown.
+
+```
+*******************************************************
+spacing xhrpoly,uhrpoly,xpc allpolynonres 480 touching_illegal \
+	"xhrpoly/uhrpoly resistor spacing to diffusion < %d (poly.9)"
+*******************************************************
+```
+- After this, we tech load ``sky130.tech`` file and execute ``drc check``
+
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/baacdb4a-831c-4cc4-aad1-12e46bba55e9)
+
+- We can select poly.9 and ``run drc`` why to check for errors. Now it fine.
+![image](https://github.com/akul-star/Advanced-Physical-Design/assets/75561390/f65ef446-ab80-46d2-9c38-32c9f590324c)
 
 
   
@@ -714,7 +814,7 @@ To run previous flow, add tag to prep design:
 ```
 prep -design picorv32a -tag [date]
 ```
-### Lab Part 1 [Day 4] - Extracting the LEF File:   
+**Extracting the LEF File:**
 PnR tool does not need all informations from the `.mag` file like the logic part but only PnR boundaries, power/ground ports, and input/output ports. This is what a [LEF file](https://teamvlsi.com/2020/05/lef-lef-file-in-asic-design.html) actually contains. So the next step is to extract the LEF file from Magic. But first, we need to follow guidelines of the PnR tool for the standard cells:
  - The input and output ports lies on the intersection of the horizontal and vertical tracks (ensure the routes can reach that ports). 
  - The width of the standard cell must be odd multiple of the tracks horizontal pitch and height must be odd multiples of tracks vertical pitch   
